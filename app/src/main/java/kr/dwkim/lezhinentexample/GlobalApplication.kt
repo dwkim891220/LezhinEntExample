@@ -1,6 +1,7 @@
 package kr.dwkim.lezhinentexample
 
 import android.app.Application
+import com.facebook.drawee.backends.pipeline.Fresco
 import kr.dwkim.lezhinentexample.util.di.appModules
 import org.koin.android.ext.android.startKoin
 

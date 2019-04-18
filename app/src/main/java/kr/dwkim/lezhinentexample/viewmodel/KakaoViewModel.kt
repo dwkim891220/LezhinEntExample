@@ -18,16 +18,19 @@ class KakaoViewModel(
 
     var page = 1
     var isEndPage = false
+    var isLoading = false
 
     fun clearVariables(){
         page = 1
         isEndPage = false
+        isLoading = false
     }
 
     data class AddSearchResultState(val list: List<DocumentModel>) : ViewModelState()
     object SearchResultIsEmptyState : ViewModelState()
     fun searchImage(keyword: String){
-        cleanLaunch {
+        isLoading = true
+        launch {
             repository.searchImage(keyword, page)
                 .with(schedulerProvider)
                 .subscribe(
@@ -40,9 +43,14 @@ class KakaoViewModel(
                                 AddSearchResultState(this)
                             }
                         } ?: SearchResultIsEmptyState
+
+                        page++
+                        isLoading = false
                     },
                     { error ->
                         errorState.value = ErrorState(error)
+
+                        isLoading = false
                     }
                 )
         }

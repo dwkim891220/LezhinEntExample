@@ -8,6 +8,7 @@ interface NetworkRepository {
     @GET(SEARCH_IMAGE)
     fun searchImage(
         @Query("query") query: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("size") size: Int = 20
     ): Single<GetSearchImageResult>
 }

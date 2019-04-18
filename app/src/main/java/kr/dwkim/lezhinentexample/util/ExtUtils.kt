@@ -3,6 +3,7 @@ package kr.dwkim.lezhinentexample.util
 import android.app.AlertDialog
 import android.content.Context
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.Completable
 import io.reactivex.Single
 import kr.dwkim.lezhinentexample.util.rx.SchedulerProvider
@@ -28,3 +29,5 @@ fun Context.showDialog(contents: String?) {
         .setMessage(contents)
         .show()
 }
+
+fun <T> AppCompatActivity.argument(key: String) = kotlin.lazy { intent?.extras?.get(key) as T }
